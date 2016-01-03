@@ -17,6 +17,17 @@ Read more usage: [http://imgcache.xg.qq.com/mta/document/iOS_quick_start.zip](ht
 
 ##2015
 
+####12.31
+
+1. 版本管理bug修复
+2. 支持游客模式,即不需注册也可以使用【附近的人】
+3. 新增自定义位置和坐标系类型接口
+
+####12.24
+
+1. 提高网络测速稳定性
+2. debug模式下，终端输出写入本地log
+
 ###11.11
 
 1. 增加用户反馈接口
