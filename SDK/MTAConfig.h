@@ -29,7 +29,7 @@ typedef enum {
 
 
 @property uint32_t sessionTimeoutSecs;          //Session超时时长，默认30秒
-@property MTAStatReportStrategy reportStrategy;    //统计上报策略
+@property (nonatomic) MTAStatReportStrategy reportStrategy;    //统计上报策略
 @property (nonatomic, retain) NSString* appkey; //应用的统计AppKey
 @property (nonatomic, retain) NSString* channel;//渠道名，默认为"appstore"
 @property uint32_t maxStoreEventCount;          //最大缓存的未发送的统计消息，默认1024

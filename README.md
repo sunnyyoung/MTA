@@ -15,6 +15,12 @@ Read more usage: [http://imgcache.xg.qq.com/mta/document/iOS_quick_start.zip](ht
 
 #Release notes
 
+##2016
+
+###01.13
+
+1. 修复崩溃报告部分符号丢失的问题
+
 ##2015
 
 ###12.24
