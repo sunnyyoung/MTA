@@ -1,11 +1,11 @@
 #MTA
 
-An unofficial MTA SDK Cocoapods repository..
+An unofficial MTA SDK CocoaPods repository..
 
 Source website: [http://mta.qq.com/](http://mta.qq.com/)
 
 
-腾讯MTA项目组太TM懒了吧？连个Cocoapods都不肯做一下！连个在线文档都不肯做，真TM服了...
+腾讯MTA项目组太TM懒了吧？连个CocoaPods都不肯做一下！连个在线文档都不肯做，真TM服了...
 
 #Usage
 
