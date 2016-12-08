@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIImage.h>
 
-#define MTA_SDK_VERSION @"1.5.8"
+#define MTA_SDK_VERSION @"1.6.3"
 #define MTA_APP_USER_VERSION  @"MTA_USER_APP_VER" 
 
 typedef enum {
@@ -52,6 +52,9 @@ typedef enum {
 
 +(void) startNewSession;
 +(void) stopSession;
+
++(void) trackActiveBegin;
++(void) trackActiveEnd;
 
 +(void) reportAppMonitorStat:(MTAAppMonitorStat*)stat;
 

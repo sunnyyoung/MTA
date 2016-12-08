@@ -31,7 +31,7 @@ typedef enum {
 @property uint32_t sessionTimeoutSecs;          //Session超时时长，默认30秒
 @property (nonatomic) MTAStatReportStrategy reportStrategy;    //统计上报策略
 @property (nonatomic, retain) NSString* appkey; //应用的统计AppKey
-@property (nonatomic, retain) NSString* channel;//渠道名，默认为"appstore"
+@property (nonatomic, retain) NSString* mtaChannel;//渠道名，默认为"appstore"
 @property uint32_t maxStoreEventCount;          //最大缓存的未发送的统计消息，默认1024
 @property uint32_t maxLoadEventCount;           //一次最大加载未发送的缓存消息，默认30
 @property uint32_t minBatchReportCount;         //统计上报策略为BATCH时，触发上报时最小缓存消息数，默认30
@@ -42,7 +42,7 @@ typedef enum {
 @property BOOL  autoExceptionCaught;            //智能捕获未catch的异常，默认TRUE；设置为False需要在startWithAppkey前调用
 @property uint32_t maxReportEventLength;        //最大上报的单条event长度，超过不上报
 @property (nonatomic, retain) NSString* qq;           //QQ号或者帐号
-@property (nonatomic, retain) NSString* account;      //帐号
+@property (nonatomic, retain) NSString* mtaAccount;      //帐号
 @property int8_t accountType;                       //帐号类型
 @property (nonatomic, retain) NSString* accountExt;   //帐号的扩展信息
 @property BOOL statEnable;
@@ -59,7 +59,9 @@ typedef enum {
 @property (nonatomic,retain) NSString* cn;          //网络类型
 @property (atomic,retain) NSString* sp;   //测速结果
 typedef void (^errorCallback)(NSString *);
-@property (nonatomic,copy) errorCallback crashCallback; //用于crash日志删除前回调， param为crash JSON数据
+@property (nonatomic,copy) errorCallback crashCallback; //用于crash日志删除前回调，将在崩溃发生后下次启动时调用， param为crash JSON数据
+//typedef void (^crashCallback) (void);
+//@property (nonatomic,copy) crashCallback atCrashCallback; // 崩溃发生时候的回调，将在崩溃发生时候调用
 -(NSString*)getCustomProperty:(NSString*) key default:(NSString*) v;
 +(instancetype) getInstance;
 @end
