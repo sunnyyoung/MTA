@@ -30,8 +30,8 @@ typedef enum {
 
 @property uint32_t sessionTimeoutSecs;          //Session超时时长，默认30秒
 @property (nonatomic) MTAStatReportStrategy reportStrategy;    //统计上报策略
-@property (nonatomic, retain) NSString* appkey; //应用的统计AppKey
-@property (nonatomic, retain) NSString* mtaChannel;//渠道名，默认为"appstore"
+@property (nonatomic, copy) NSString* appkey; //应用的统计AppKey
+@property (nonatomic, copy) NSString* channel;//渠道名，默认为"appstore"
 @property uint32_t maxStoreEventCount;          //最大缓存的未发送的统计消息，默认1024
 @property uint32_t maxLoadEventCount;           //一次最大加载未发送的缓存消息，默认30
 @property uint32_t minBatchReportCount;         //统计上报策略为BATCH时，触发上报时最小缓存消息数，默认30
@@ -41,23 +41,23 @@ typedef enum {
 @property BOOL  smartReporting;                 //智能上报开关：在WIFI模式下实时上报，默认TRUE
 @property BOOL  autoExceptionCaught;            //智能捕获未catch的异常，默认TRUE；设置为False需要在startWithAppkey前调用
 @property uint32_t maxReportEventLength;        //最大上报的单条event长度，超过不上报
-@property (nonatomic, retain) NSString* qq;           //QQ号或者帐号
-@property (nonatomic, retain) NSString* mtaAccount;      //帐号
+@property (nonatomic, copy) NSString* qq;           //QQ号或者帐号
+@property (nonatomic, copy) NSString* account;      //帐号
 @property int8_t accountType;                       //帐号类型
-@property (nonatomic, retain) NSString* accountExt;   //帐号的扩展信息
+@property (nonatomic, copy) NSString* accountExt;   //帐号的扩展信息
 @property BOOL statEnable;
 
-@property (nonatomic, retain) NSString* customerUserID;
-@property (nonatomic, retain) NSString* customerAppVersion;
-@property (nonatomic, retain) NSString* ifa;
-@property (nonatomic, retain) NSString* pushDeviceToken;
+@property (nonatomic, copy) NSString* customerUserID;
+@property (nonatomic, copy) NSString* customerAppVersion;
+@property (nonatomic, copy) NSString* ifa;
+@property (nonatomic, copy) NSString* pushDeviceToken;
 
-@property (nonatomic, retain) NSString* statReportURL; //自定义的上报url
+@property (nonatomic, copy) NSString* statReportURL; //自定义的上报url
 @property int32_t maxSessionStatReportCount;
 
-@property (nonatomic,retain) NSString* op;          //运营商
-@property (nonatomic,retain) NSString* cn;          //网络类型
-@property (atomic,retain) NSString* sp;   //测速结果
+@property (nonatomic,copy) NSString* op;          //运营商
+@property (nonatomic,copy) NSString* cn;          //网络类型
+
 typedef void (^errorCallback)(NSString *);
 @property (nonatomic,copy) errorCallback crashCallback; //用于crash日志删除前回调，将在崩溃发生后下次启动时调用， param为crash JSON数据
 //typedef void (^crashCallback) (void);

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIImage.h>
 
-#define MTA_SDK_VERSION @"1.6.3"
+#define MTA_SDK_VERSION @"1.6.6"
 #define MTA_APP_USER_VERSION  @"MTA_USER_APP_VER" 
 
 typedef enum {
