@@ -15,37 +15,37 @@ typedef enum {
 	/**
 	 实时上报
 	 */
-    MTA_STRATEGY_INSTANT = 1,
+	MTA_STRATEGY_INSTANT = 1,
 
 	/**
 	 批量上报，达到缓存临界值时触发发送
 	 */
-    MTA_STRATEGY_BATCH = 2,
+	MTA_STRATEGY_BATCH = 2,
 
 	/**
 	 应用启动时发送
 	 */
-    MTA_STRATEGY_APP_LAUNCH = 3,
+	MTA_STRATEGY_APP_LAUNCH = 3,
 
 	/**
 	 仅在WIFI网络下发送
 	 */
-    MTA_STRATEGY_ONLY_WIFI = 4,
+	MTA_STRATEGY_ONLY_WIFI = 4,
 
 	/**
 	 每间隔一定最小时间发送，默认24小时
 	 */
-    MTA_STRATEGY_PERIOD = 5,
+	MTA_STRATEGY_PERIOD = 5,
 
 	/**
 	 开发者在代码中主动调用发送行为
 	 */
-    MTA_STRATEGY_DEVELOPER = 6,
+	MTA_STRATEGY_DEVELOPER = 6,
 
 	/**
 	 仅在WIFI网络下发送, 发送失败以及非WIFI网络情况下不缓存数据
 	 */
-    MTA_STRATEGY_ONLY_WIFI_NO_CACHE = 7
+	MTA_STRATEGY_ONLY_WIFI_NO_CACHE = 7
 } MTAStatReportStrategy;
 
 @interface MTAConfig : NSObject
@@ -58,7 +58,7 @@ typedef enum {
 
  @return MTAConfig的共享实例
  */
-+(instancetype) getInstance;
++ (instancetype)getInstance;
 
 /**
  debug开关
@@ -79,12 +79,12 @@ typedef enum {
 /**
  应用的统计AppKey
  */
-@property (nonatomic, copy) NSString* appkey;
+@property (nonatomic, copy) NSString *appkey;
 
 /**
  渠道名，默认为"appstore"
  */
-@property (nonatomic, copy) NSString* channel;
+@property (nonatomic, copy) NSString *channel;
 
 
 /**
@@ -123,13 +123,13 @@ typedef enum {
  否则按照全局策略上报
  默认打开
  */
-@property BOOL  smartReporting;
+@property BOOL smartReporting;
 
 /**
  是否启动MTA的崩溃报告功能
  默认为YES
  */
-@property BOOL  autoExceptionCaught;
+@property BOOL autoExceptionCaught;
 
 /**
  最大上报的单条event长度，超过不上报
@@ -143,7 +143,7 @@ typedef enum {
  调用MTA reportQQ方法后会设置此属性
  默认为空
  */
-@property (nonatomic, copy) NSString* qq;
+@property (nonatomic, copy) NSString *qq;
 
 /**
  MTA是否启动
@@ -154,7 +154,7 @@ typedef enum {
  设备的idfa，建议有广告权限的app设置此字段
  默认为空
  */
-@property (nonatomic, copy) NSString* ifa;
+@property (nonatomic, copy) NSString *ifa;
 
 /**
  用户自定义的App版本
@@ -163,7 +163,7 @@ typedef enum {
  若没设置，则取工程配置文件中的‘Bundle versions string, short’字段作为APP版本上报
  若没没设置‘Bundle versions string, short’字段，则取‘Bundle version’字段上报
  */
-@property (nonatomic, copy) NSString* customerAppVersion;
+@property (nonatomic, copy) NSString *customerAppVersion;
 
 /**
  一个Session内允许上报的最大事件数
@@ -184,7 +184,7 @@ typedef void (^errorCallback)(NSString *);
 /**
  崩溃报告的回调函数
  */
-@property (nonatomic,copy) errorCallback crashCallback; //用于crash日志删除前回调，将在崩溃发生后下次启动时调用， param为crash JSON数据
+@property (nonatomic, copy) errorCallback crashCallback; //用于crash日志删除前回调，将在崩溃发生后下次启动时调用， param为crash JSON数据
 
 /**
  获取在MTA前端控制台配置的参数
@@ -195,18 +195,18 @@ typedef void (^errorCallback)(NSString *);
  @param v 没取到参数时返回的默认值
  @return 参数的值或者默认值
  */
--(NSString*)getCustomProperty:(NSString*) key default:(NSString*) v;
+- (NSString *)getCustomProperty:(NSString *)key default:(NSString *)v;
 
 #pragma mark - 高级配置项，具体配置方法请咨询客服
 
-@property (nonatomic, copy) NSString* statReportURL;
-@property (nonatomic, copy) NSString* customerUserID;
-@property (nonatomic, copy) NSString* account;
+@property (nonatomic, copy) NSString *statReportURL;
+@property (nonatomic, copy) NSString *customerUserID;
+@property (nonatomic, copy) NSString *account;
 @property int8_t accountType;
-@property (nonatomic, copy) NSString* accountExt;
-@property (nonatomic, copy) NSString* pushDeviceToken;
-@property (nonatomic,copy) NSString* op;
-@property (nonatomic,copy) NSString* cn;
+@property (nonatomic, copy) NSString *accountExt;
+@property (nonatomic, copy) NSString *pushDeviceToken;
+@property (nonatomic, copy) NSString *op;
+@property (nonatomic, copy) NSString *cn;
 
 //typedef void (^crashCallback) (void);
 //@property (nonatomic,copy) crashCallback atCrashCallback; // 崩溃发生时候的回调，将在崩溃发生时候调用

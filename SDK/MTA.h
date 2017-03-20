@@ -12,7 +12,7 @@
 /**
  MTA版本号
  */
-#define MTA_SDK_VERSION @"1.6.7"
+#define MTA_SDK_VERSION @"1.6.9"
 
 #pragma mark - 接口监控相关数据结构
 /**
@@ -22,17 +22,17 @@ typedef enum {
 	/**
 	 接口调用成功
 	 */
-    MTA_SUCCESS = 0,
+	MTA_SUCCESS = 0,
 
 	/**
 	 接口调用失败
 	 */
-    MTA_FAILURE = 1,
+	MTA_FAILURE = 1,
 
 	/**
 	 接口调用出现逻辑错误
 	 */
-    MTA_LOGIC_FAILURE = 2
+	MTA_LOGIC_FAILURE = 2
 } MTAAppMonitorErrorType;
 
 
@@ -44,7 +44,7 @@ typedef enum {
 /**
  监控业务接口名
  */
-@property (nonatomic, retain) NSString* interface;
+@property (nonatomic, retain) NSString *interface;
 
 /**
  上传请求包量，单位字节
@@ -87,7 +87,7 @@ typedef enum {
 
  @param appkey 从网页申请的appKey
  */
-+(void) startWithAppkey:(NSString*) appkey;
++ (void)startWithAppkey:(NSString *)appkey;
 
 /**
  检测版本，并启动MTA。
@@ -97,7 +97,7 @@ typedef enum {
  @param ver 最低允许启动的版本
  @return 如果MTA成功启动，返回YES，否则返回NO
  */
-+(BOOL) startWithAppkey:(NSString*) appkey checkedSdkVersion:(NSString*)ver;
++ (BOOL)startWithAppkey:(NSString *)appkey checkedSdkVersion:(NSString *)ver;
 
 #pragma mark - 统计页面时长
 
@@ -108,7 +108,7 @@ typedef enum {
 
  @param page 页面名
  */
-+(void) trackPageViewBegin:(NSString*) page;
++ (void)trackPageViewBegin:(NSString *)page;
 
 
 /**
@@ -120,7 +120,7 @@ typedef enum {
  @param page 页面名
  @param appkey 若此参数不为nil，则上报到此appkey。否则，上报到startWithAppkey中传入的appkey
  */
-+(void) trackPageViewBegin:(NSString*) page appkey:(NSString *)appkey;
++ (void)trackPageViewBegin:(NSString *)page appkey:(NSString *)appkey;
 
 
 /**
@@ -130,7 +130,7 @@ typedef enum {
 
  @param page 页面名字
  */
-+(void) trackPageViewEnd:(NSString*) page;
++ (void)trackPageViewEnd:(NSString *)page;
 
 /**
  标记一起页面访问的结束
@@ -142,7 +142,7 @@ typedef enum {
  @param appkey 若此参数不为nil，则上报到此appkey。否则，上报到startWithAppkey中传入的appkey
  @param isRealTime 是否实时上报，若传入YES，则忽略全局上报策略实时上报。否则按照全局策略上报。
  */
-+(void) trackPageViewEnd:(NSString*) page appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
++ (void)trackPageViewEnd:(NSString *)page appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
 
 #pragma mark - 错误统计
 
@@ -152,7 +152,7 @@ typedef enum {
 
  @param error 错误描述
  */
-+(void) trackError:(NSString*)error;
++ (void)trackError:(NSString *)error;
 
 
 /**
@@ -164,7 +164,7 @@ typedef enum {
  @param appkey 若此参数不为nil，则上报到此appkey。否则，上报到startWithAppkey中传入的appkey
  @param isRealTime 是否实时上报，若传入YES，则忽略全局上报策略实时上报。否则按照全局策略上报。
  */
-+(void) trackError:(NSString*)error appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
++ (void)trackError:(NSString *)error appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
 
 /**
  统计异常
@@ -172,7 +172,7 @@ typedef enum {
 
  @param exception 异常信息
  */
-+(void) trackException:(NSException*)exception;
++ (void)trackException:(NSException *)exception;
 
 /**
  统计异常
@@ -183,7 +183,7 @@ typedef enum {
  @param appkey 若此参数不为nil，则上报到此appkey。否则，上报到startWithAppkey中传入的appkey
  @param isRealTime 是否实时上报，若传入YES，则忽略全局上报策略实时上报。否则按照全局策略上报。
  */
-+(void) trackException:(NSException*)exception appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
++ (void)trackException:(NSException *)exception appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
 
 #pragma mark - 自定义事件
 
@@ -206,7 +206,7 @@ typedef enum {
  @param event_id 事件的ID，ID需要先在MTA前台配置好才能生效
  @param kvs 事件的参数，参数需要先在MTA前台配置好才能生效
  */
-+(void) trackCustomKeyValueEvent:(NSString*)event_id props:(NSDictionary*) kvs;
++ (void)trackCustomKeyValueEvent:(NSString *)event_id props:(NSDictionary *)kvs;
 
 /**
  上报自定义事件
@@ -217,7 +217,7 @@ typedef enum {
  @param appkey 需要上报的appKey，若传入nil，则上报到启动函数中的appkey
  @param isRealTime 是否实时上报，若传入YES，则忽略全局上报策略实时上报。否则按照全局策略上报。
  */
-+(void) trackCustomKeyValueEvent:(NSString*)event_id props:(NSDictionary*) kvs appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
++ (void)trackCustomKeyValueEvent:(NSString *)event_id props:(NSDictionary *)kvs appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
 
 /**
  开始统计自定义时长事件
@@ -227,7 +227,7 @@ typedef enum {
  @param event_id 事件的ID，ID需要先在MTA前台配置好才能生效
  @param kvs 事件的参数，参数需要先在MTA前台配置好才能生效
  */
-+(void) trackCustomKeyValueEventBegin:(NSString*)event_id props:(NSDictionary*) kvs;
++ (void)trackCustomKeyValueEventBegin:(NSString *)event_id props:(NSDictionary *)kvs;
 
 /**
  开始统计自定义时长事件
@@ -239,7 +239,7 @@ typedef enum {
  @param kvs 事件的参数，参数需要先在MTA前台配置好才能生效
  @param appkey 需要上报的appKey，若传入nil，则上报到启动函数中的appkey
  */
-+(void) trackCustomKeyValueEventBegin:(NSString*)event_id props:(NSDictionary*) kvs appkey:(NSString *)appkey;
++ (void)trackCustomKeyValueEventBegin:(NSString *)event_id props:(NSDictionary *)kvs appkey:(NSString *)appkey;
 
 /**
  结束统计自定义时长事件
@@ -250,7 +250,7 @@ typedef enum {
  @param kvs 事件的参数，参数需要先在MTA前台配置好才能生效
  			参数中的key和value必须跟开始统计时传入的参数一样才能正常配对
  */
-+(void) trackCustomKeyValueEventEnd:(NSString*)event_id props:(NSDictionary*) kvs;
++ (void)trackCustomKeyValueEventEnd:(NSString *)event_id props:(NSDictionary *)kvs;
 
 /**
  结束上报自定义时长事件
@@ -264,7 +264,7 @@ typedef enum {
  @param appkey 需要上报的appKey，若传入nil，则上报到启动函数中的appkey
  @param isRealTime 是否实时上报，若传入YES，则忽略全局上报策略实时上报。否则按照全局策略上报。
  */
-+(void) trackCustomKeyValueEventEnd:(NSString*)event_id props:(NSDictionary*) kvs appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
++ (void)trackCustomKeyValueEventEnd:(NSString *)event_id props:(NSDictionary *)kvs appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
 
 
 /**
@@ -275,7 +275,7 @@ typedef enum {
  @param event_id 事件的ID，ID需要先在MTA前台配置好才能生效
  @param kvs 事件的参数，参数需要先在MTA前台配置好才能生效
  */
-+(void) trackCustomKeyValueEventDuration:(uint32_t)seconds withEventid:(NSString*)event_id props:(NSDictionary*) kvs;
++ (void)trackCustomKeyValueEventDuration:(uint32_t)seconds withEventid:(NSString *)event_id props:(NSDictionary *)kvs;
 
 /**
  直接上报自定义时长事件
@@ -288,7 +288,7 @@ typedef enum {
  @param appkey 需要上报的appKey，若传入nil，则上报到启动函数中的appkey
  @param isRealTime 是否实时上报，若传入YES，则忽略全局上报策略实时上报。否则按照全局策略上报。
  */
-+(void) trackCustomKeyValueEventDuration:(uint32_t) seconds withEventid:(NSString*)event_id props:(NSDictionary*) kvs appKey:(NSString*)appkey isRealTime:(BOOL)isRealTime;
++ (void)trackCustomKeyValueEventDuration:(uint32_t)seconds withEventid:(NSString *)event_id props:(NSDictionary *)kvs appKey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
 
 #pragma mark - NSArray为参数的自定义事件
 /**
@@ -297,7 +297,7 @@ typedef enum {
  @param event_id 事件的ID，ID需要先在MTA前台配置好才能生效
  @param array 事件的参数，参数需要先在MTA前台配置好才能生效
  */
-+(void) trackCustomEvent:(NSString*)event_id args:(NSArray*) array;
++ (void)trackCustomEvent:(NSString *)event_id args:(NSArray *)array;
 
 
 /**
@@ -309,7 +309,7 @@ typedef enum {
  @param appkey 需要上报的appKey，若传入nil，则上报到启动函数中的appkey
  @param isRealTime 是否实时上报，若传入YES，则忽略全局上报策略实时上报。否则按照全局策略上报。
  */
-+(void) trackCustomEvent:(NSString*)event_id args:(NSArray*) array appkey:(NSString *)appkey  isRealTime:(BOOL)isRealTime;
++ (void)trackCustomEvent:(NSString *)event_id args:(NSArray *)array appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
 
 /**
  开始统计自定义时长事件
@@ -319,7 +319,7 @@ typedef enum {
  @param event_id 事件的ID，ID需要先在MTA前台配置好才能生效
  @param array 事件的参数，参数需要先在MTA前台配置好才能生效
  */
-+(void) trackCustomEventBegin:(NSString*)event_id args:(NSArray*) array;
++ (void)trackCustomEventBegin:(NSString *)event_id args:(NSArray *)array;
 
 /**
  开始统计自定义时长事件
@@ -331,7 +331,7 @@ typedef enum {
  @param array 事件的参数，参数需要先在MTA前台配置好才能生效
  @param appkey 需要上报的appKey，若传入nil，则上报到启动函数中的appkey
  */
-+(void) trackCustomEventBegin:(NSString*)event_id args:(NSArray*) array appkey:(NSString *)appkey;
++ (void)trackCustomEventBegin:(NSString *)event_id args:(NSArray *)array appkey:(NSString *)appkey;
 
 /**
  结束统计自定义时长事件
@@ -342,7 +342,7 @@ typedef enum {
  @param array 事件的参数，参数需要先在MTA前台配置好才能生效
  				参数中的各项必须跟开始统计时传入的参数一样才能正常配对
  */
-+(void) trackCustomEventEnd:(NSString*)event_id args:(NSArray*) array;
++ (void)trackCustomEventEnd:(NSString *)event_id args:(NSArray *)array;
 
 /**
  结束统计自定义时长事件
@@ -356,7 +356,7 @@ typedef enum {
  @param appkey 需要上报的appKey，若传入nil，则上报到启动函数中的appkey
  @param isRealTime 是否实时上报，若传入YES，则忽略全局上报策略实时上报。否则按照全局策略上报。
  */
-+(void) trackCustomEventEnd:(NSString*)event_id args:(NSArray*) array appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
++ (void)trackCustomEventEnd:(NSString *)event_id args:(NSArray *)array appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
 
 /**
  上报当前缓存的数据
@@ -365,7 +365,7 @@ typedef enum {
 
  @param maxStatCount 最大上报事件的条数
  */
-+(void) commitCachedStats:(int32_t) maxStatCount;
++ (void)commitCachedStats:(int32_t)maxStatCount;
 
 #pragma mark - session相关
 
@@ -373,7 +373,7 @@ typedef enum {
  检测session是否过期，若过期，则生成一个新Session事件
  事件上报方式按照全局上报方式上报
  */
-+(void) startNewSession;
++ (void)startNewSession;
 
 /**
  检测session是否过期，若过期，则生成一个新Session事件
@@ -381,12 +381,12 @@ typedef enum {
 
  @param isRealTime 是否实时上报，若传入YES，则忽略全局上报策略实时上报。否则按照全局策略上报。
  */
-+(void) startNewSession:(BOOL)isRealTime;
++ (void)startNewSession:(BOOL)isRealTime;
 
 /**
  停止当前session
  */
-+(void) stopSession;
++ (void)stopSession;
 
 #pragma mark - 使用时长
 
@@ -394,13 +394,13 @@ typedef enum {
  开始统计使用时长
  建议在App进入前台时调用
  */
-+(void) trackActiveBegin;
++ (void)trackActiveBegin;
 
 /**
  结束统计使用时长
  建议在App离开前台时调用
  */
-+(void) trackActiveEnd;
++ (void)trackActiveEnd;
 
 #pragma mark - 接口统计
 
@@ -410,7 +410,7 @@ typedef enum {
 
  @param stat 接口统计的数据，详情请看接口统计数据结构的相关说明
  */
-+(void) reportAppMonitorStat:(MTAAppMonitorStat*)stat;
++ (void)reportAppMonitorStat:(MTAAppMonitorStat *)stat;
 
 /**
  对网络接口的调用情况进行统计
@@ -421,7 +421,7 @@ typedef enum {
  @param appkey 需要上报的appKey，若传入nil，则上报到启动函数中的appkey
  @param isRealTime 是否实时上报，若传入YES，则忽略全局上报策略实时上报。否则按照全局策略上报。
  */
-+(void) reportAppMonitorStat:(MTAAppMonitorStat*)stat appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
++ (void)reportAppMonitorStat:(MTAAppMonitorStat *)stat appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
 
 #pragma mark - 上报账号
 /**
@@ -430,7 +430,7 @@ typedef enum {
 
  @param qq QQ号
  */
-+(void) reportQQ:(NSString*)qq;
++ (void)reportQQ:(NSString *)qq;
 
 /**
  上报QQ号
@@ -441,7 +441,7 @@ typedef enum {
  @param appkey 需要上报的appKey，若传入nil，则上报到启动函数中的appkey
  @param isRealTime 是否实时上报，若传入YES，则忽略全局上报策略实时上报。否则按照全局策略上报。
  */
-+(void) reportQQ:(NSString*)qq appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
++ (void)reportQQ:(NSString *)qq appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
 
 #pragma mark - MTA标识
 
@@ -450,13 +450,13 @@ typedef enum {
 
  @return MTA内部设备标识
  */
-+(NSString *) getMtaUDID;
++ (NSString *)getMtaUDID;
 
 #pragma mark - MTA高级功能，具体使用方法请咨询客服
-+(void) reportAccount:(NSString *)account type:(uint32_t)type ext:(NSString *)ext;
-+(void) reportAccount:(NSString *)account type:(uint32_t)type ext:(NSString *)ext appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
++ (void)reportAccount:(NSString *)account type:(uint32_t)type ext:(NSString *)ext;
++ (void)reportAccount:(NSString *)account type:(uint32_t)type ext:(NSString *)ext appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
 
-+(void) trackGameUser:(NSString*)uid world:(NSString*)wd level:(NSString*)lev;
-+(void) trackGameUser:(NSString*)uid world:(NSString*)wd level:(NSString*)lev appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
++ (void)trackGameUser:(NSString *)uid world:(NSString *)wd level:(NSString *)lev;
++ (void)trackGameUser:(NSString *)uid world:(NSString *)wd level:(NSString *)lev appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
 
 @end

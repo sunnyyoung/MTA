@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "MTA"
-  s.version      = "1.6.7"
+  s.version      = "1.6.9"
   s.summary      = "An unofficial MTA SDK Cocoapods repository."
   s.homepage     = "http://mta.qq.com"
   s.license      = "MIT"
