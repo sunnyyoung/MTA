@@ -12,7 +12,7 @@
 /**
  MTA版本号
  */
-#define MTA_SDK_VERSION @"1.6.9"
+#define MTA_SDK_VERSION @"2.0.0"
 
 #pragma mark - 接口监控相关数据结构
 /**
@@ -35,6 +35,32 @@ typedef enum {
 	MTA_LOGIC_FAILURE = 2
 } MTAAppMonitorErrorType;
 
+/**
+ reportAccount中的类型
+
+ - AT_QQ: QQ号
+ - AT_OTH: 其他账号
+ */
+typedef NS_ENUM(NSUInteger, MTAAccountType) {
+	AT_QQ,
+	AT_OTH,
+};
+
+
+/**
+ MTA错误码
+
+ - EC_OK: 无错误
+ - EC_SERVICE_DISABLE: MTA服务未启动，请检查是否调用[MTA startWithAppkey:]
+ - EC_ARGUMENT_INVALID: 参数错误，比如eventID为空，或者在没有结束计时事件的情况下又重新开始计时事件
+ - EC_INPUT_LENGTH_LIMIT: 参数过长，详细情况请查看自定义事件API的注释
+ */
+typedef NS_ENUM(NSInteger, MTAErrorCode) {
+	EC_OK = 0,
+	EC_SERVICE_DISABLE = -1,
+	EC_ARGUMENT_INVALID = 1000,
+	EC_INPUT_LENGTH_LIMIT = 1001,
+};
 
 /**
  接口统计的数据结构
@@ -44,7 +70,7 @@ typedef enum {
 /**
  监控业务接口名
  */
-@property (nonatomic, retain) NSString *interface;
+@property (nonatomic, strong) NSString *interface;
 
 /**
  上传请求包量，单位字节
@@ -151,8 +177,9 @@ typedef enum {
  逻辑错误只有描述，没有堆栈信息
 
  @param error 错误描述
+ @return MTA错误码，详情请看MTAErrorCode相关注释与自定义参数长度限制说明
  */
-+ (void)trackError:(NSString *)error;
++ (MTAErrorCode)trackError:(NSString *)error;
 
 
 /**
@@ -163,16 +190,18 @@ typedef enum {
  @param error 错误描述
  @param appkey 若此参数不为nil，则上报到此appkey。否则，上报到startWithAppkey中传入的appkey
  @param isRealTime 是否实时上报，若传入YES，则忽略全局上报策略实时上报。否则按照全局策略上报。
+ @return MTA错误码，详情请看MTAErrorCode相关注释与自定义参数长度限制说明
  */
-+ (void)trackError:(NSString *)error appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
++ (MTAErrorCode)trackError:(NSString *)error appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
 
 /**
  统计异常
  异常信息包括了异常的原因和堆栈
 
  @param exception 异常信息
+ @return MTA错误码，详情请看MTAErrorCode相关注释与自定义参数长度限制说明
  */
-+ (void)trackException:(NSException *)exception;
++ (MTAErrorCode)trackException:(NSException *)exception;
 
 /**
  统计异常
@@ -182,8 +211,9 @@ typedef enum {
  @param exception 异常信息
  @param appkey 若此参数不为nil，则上报到此appkey。否则，上报到startWithAppkey中传入的appkey
  @param isRealTime 是否实时上报，若传入YES，则忽略全局上报策略实时上报。否则按照全局策略上报。
+ @return MTA错误码，详情请看MTAErrorCode相关注释与自定义参数长度限制说明
  */
-+ (void)trackException:(NSException *)exception appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
++ (MTAErrorCode)trackException:(NSException *)exception appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
 
 #pragma mark - 自定义事件
 
@@ -199,14 +229,22 @@ typedef enum {
  因此推荐优先使用NSDictionary的参数上报
  */
 
+#pragma mark - 自定义事件参数长度限制说明
+/**
+ 自定义参数长度上限为60kb，
+ 计算方法为将参数转换为JSON字符串以后与event_id连接。
+ 然后判断连接后的字符串是否超过限制。
+ */
+
 #pragma mark - NSDictionary为参数的自定义事件
 /**
  上报自定义事件
 
  @param event_id 事件的ID，ID需要先在MTA前台配置好才能生效
  @param kvs 事件的参数，参数需要先在MTA前台配置好才能生效
+ @return MTA错误码，详情请看MTAErrorCode相关注释与自定义参数长度限制说明
  */
-+ (void)trackCustomKeyValueEvent:(NSString *)event_id props:(NSDictionary *)kvs;
++ (MTAErrorCode)trackCustomKeyValueEvent:(NSString *)event_id props:(NSDictionary *)kvs;
 
 /**
  上报自定义事件
@@ -216,8 +254,10 @@ typedef enum {
  @param kvs 事件的参数，参数需要先在MTA前台配置好才能生效
  @param appkey 需要上报的appKey，若传入nil，则上报到启动函数中的appkey
  @param isRealTime 是否实时上报，若传入YES，则忽略全局上报策略实时上报。否则按照全局策略上报。
+ @return MTA错误码，详情请看MTAErrorCode相关注释与自定义参数长度限制说明
  */
-+ (void)trackCustomKeyValueEvent:(NSString *)event_id props:(NSDictionary *)kvs appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
+
++ (MTAErrorCode)trackCustomKeyValueEvent:(NSString *)event_id props:(NSDictionary *)kvs appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
 
 /**
  开始统计自定义时长事件
@@ -226,8 +266,9 @@ typedef enum {
 
  @param event_id 事件的ID，ID需要先在MTA前台配置好才能生效
  @param kvs 事件的参数，参数需要先在MTA前台配置好才能生效
+ @return MTA错误码，详情请看MTAErrorCode相关注释与自定义参数长度限制说明
  */
-+ (void)trackCustomKeyValueEventBegin:(NSString *)event_id props:(NSDictionary *)kvs;
++ (MTAErrorCode)trackCustomKeyValueEventBegin:(NSString *)event_id props:(NSDictionary *)kvs;
 
 /**
  开始统计自定义时长事件
@@ -238,8 +279,9 @@ typedef enum {
  @param event_id 事件的ID，ID需要先在MTA前台配置好才能生效
  @param kvs 事件的参数，参数需要先在MTA前台配置好才能生效
  @param appkey 需要上报的appKey，若传入nil，则上报到启动函数中的appkey
+ @return MTA错误码，详情请看MTAErrorCode相关注释与自定义参数长度限制说明
  */
-+ (void)trackCustomKeyValueEventBegin:(NSString *)event_id props:(NSDictionary *)kvs appkey:(NSString *)appkey;
++ (MTAErrorCode)trackCustomKeyValueEventBegin:(NSString *)event_id props:(NSDictionary *)kvs appkey:(NSString *)appkey;
 
 /**
  结束统计自定义时长事件
@@ -249,8 +291,9 @@ typedef enum {
  @param event_id 事件的ID，ID需要先在MTA前台配置好才能生效
  @param kvs 事件的参数，参数需要先在MTA前台配置好才能生效
  			参数中的key和value必须跟开始统计时传入的参数一样才能正常配对
+ @return MTA错误码，详情请看MTAErrorCode相关注释与自定义参数长度限制说明
  */
-+ (void)trackCustomKeyValueEventEnd:(NSString *)event_id props:(NSDictionary *)kvs;
++ (MTAErrorCode)trackCustomKeyValueEventEnd:(NSString *)event_id props:(NSDictionary *)kvs;
 
 /**
  结束上报自定义时长事件
@@ -263,8 +306,9 @@ typedef enum {
  			参数中的key和value必须跟开始统计时传入的参数一样才能正常配对
  @param appkey 需要上报的appKey，若传入nil，则上报到启动函数中的appkey
  @param isRealTime 是否实时上报，若传入YES，则忽略全局上报策略实时上报。否则按照全局策略上报。
+ @return MTA错误码，详情请看MTAErrorCode相关注释与自定义参数长度限制说明
  */
-+ (void)trackCustomKeyValueEventEnd:(NSString *)event_id props:(NSDictionary *)kvs appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
++ (MTAErrorCode)trackCustomKeyValueEventEnd:(NSString *)event_id props:(NSDictionary *)kvs appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
 
 
 /**
@@ -274,8 +318,9 @@ typedef enum {
  @param seconds 自定义事件的时长，单位秒
  @param event_id 事件的ID，ID需要先在MTA前台配置好才能生效
  @param kvs 事件的参数，参数需要先在MTA前台配置好才能生效
+ @return MTA错误码，详情请看MTAErrorCode相关注释与自定义参数长度限制说明
  */
-+ (void)trackCustomKeyValueEventDuration:(uint32_t)seconds withEventid:(NSString *)event_id props:(NSDictionary *)kvs;
++ (MTAErrorCode)trackCustomKeyValueEventDuration:(uint32_t)seconds withEventid:(NSString *)event_id props:(NSDictionary *)kvs;
 
 /**
  直接上报自定义时长事件
@@ -287,8 +332,9 @@ typedef enum {
  @param kvs 事件的参数，参数需要先在MTA前台配置好才能生效
  @param appkey 需要上报的appKey，若传入nil，则上报到启动函数中的appkey
  @param isRealTime 是否实时上报，若传入YES，则忽略全局上报策略实时上报。否则按照全局策略上报。
+ @return MTA错误码，详情请看MTAErrorCode相关注释与自定义参数长度限制说明
  */
-+ (void)trackCustomKeyValueEventDuration:(uint32_t)seconds withEventid:(NSString *)event_id props:(NSDictionary *)kvs appKey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
++ (MTAErrorCode)trackCustomKeyValueEventDuration:(uint32_t)seconds withEventid:(NSString *)event_id props:(NSDictionary *)kvs appKey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
 
 #pragma mark - NSArray为参数的自定义事件
 /**
@@ -296,8 +342,9 @@ typedef enum {
 
  @param event_id 事件的ID，ID需要先在MTA前台配置好才能生效
  @param array 事件的参数，参数需要先在MTA前台配置好才能生效
+ @return MTA错误码，详情请看MTAErrorCode相关注释与自定义参数长度限制说明
  */
-+ (void)trackCustomEvent:(NSString *)event_id args:(NSArray *)array;
++ (MTAErrorCode)trackCustomEvent:(NSString *)event_id args:(NSArray *)array;
 
 
 /**
@@ -308,8 +355,9 @@ typedef enum {
  @param array 事件的参数，参数需要先在MTA前台配置好才能生效
  @param appkey 需要上报的appKey，若传入nil，则上报到启动函数中的appkey
  @param isRealTime 是否实时上报，若传入YES，则忽略全局上报策略实时上报。否则按照全局策略上报。
+ @return MTA错误码，详情请看MTAErrorCode相关注释与自定义参数长度限制说明
  */
-+ (void)trackCustomEvent:(NSString *)event_id args:(NSArray *)array appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
++ (MTAErrorCode)trackCustomEvent:(NSString *)event_id args:(NSArray *)array appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
 
 /**
  开始统计自定义时长事件
@@ -318,8 +366,9 @@ typedef enum {
 
  @param event_id 事件的ID，ID需要先在MTA前台配置好才能生效
  @param array 事件的参数，参数需要先在MTA前台配置好才能生效
+ @return MTA错误码，详情请看MTAErrorCode相关注释与自定义参数长度限制说明
  */
-+ (void)trackCustomEventBegin:(NSString *)event_id args:(NSArray *)array;
++ (MTAErrorCode)trackCustomEventBegin:(NSString *)event_id args:(NSArray *)array;
 
 /**
  开始统计自定义时长事件
@@ -330,8 +379,9 @@ typedef enum {
  @param event_id 事件的ID，ID需要先在MTA前台配置好才能生效
  @param array 事件的参数，参数需要先在MTA前台配置好才能生效
  @param appkey 需要上报的appKey，若传入nil，则上报到启动函数中的appkey
+ @return MTA错误码，详情请看MTAErrorCode相关注释与自定义参数长度限制说明
  */
-+ (void)trackCustomEventBegin:(NSString *)event_id args:(NSArray *)array appkey:(NSString *)appkey;
++ (MTAErrorCode)trackCustomEventBegin:(NSString *)event_id args:(NSArray *)array appkey:(NSString *)appkey;
 
 /**
  结束统计自定义时长事件
@@ -341,8 +391,9 @@ typedef enum {
  @param event_id 事件的ID，ID需要先在MTA前台配置好才能生效
  @param array 事件的参数，参数需要先在MTA前台配置好才能生效
  				参数中的各项必须跟开始统计时传入的参数一样才能正常配对
+ @return MTA错误码，详情请看MTAErrorCode相关注释与自定义参数长度限制说明
  */
-+ (void)trackCustomEventEnd:(NSString *)event_id args:(NSArray *)array;
++ (MTAErrorCode)trackCustomEventEnd:(NSString *)event_id args:(NSArray *)array;
 
 /**
  结束统计自定义时长事件
@@ -355,8 +406,9 @@ typedef enum {
  				参数中的各项必须跟开始统计时传入的参数一样才能正常配对
  @param appkey 需要上报的appKey，若传入nil，则上报到启动函数中的appkey
  @param isRealTime 是否实时上报，若传入YES，则忽略全局上报策略实时上报。否则按照全局策略上报。
+ @return MTA错误码，详情请看MTAErrorCode相关注释与自定义参数长度限制说明
  */
-+ (void)trackCustomEventEnd:(NSString *)event_id args:(NSArray *)array appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
++ (MTAErrorCode)trackCustomEventEnd:(NSString *)event_id args:(NSArray *)array appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
 
 /**
  上报当前缓存的数据
@@ -424,24 +476,15 @@ typedef enum {
 + (void)reportAppMonitorStat:(MTAAppMonitorStat *)stat appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
 
 #pragma mark - 上报账号
-/**
- 上报QQ号
- 上报QQ号以后可以使用MTA提供的用户画像功能
-
- @param qq QQ号
- */
-+ (void)reportQQ:(NSString *)qq;
 
 /**
- 上报QQ号
- 并指定上报方式
- 上报QQ号以后可以使用MTA提供的用户画像功能
+ 上报账号对应实时数据中的新增账号数字段
+ 如果上报的账号类型是QQ号，还能同时激活用户画像功能
 
- @param qq QQ号
- @param appkey 需要上报的appKey，若传入nil，则上报到启动函数中的appkey
- @param isRealTime 是否实时上报，若传入YES，则忽略全局上报策略实时上报。否则按照全局策略上报。
+ @param account 账号名
+ @param accountType 账号类型
  */
-+ (void)reportQQ:(NSString *)qq appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
++ (void)setAccount:(NSString *)account type:(MTAAccountType)accountType;
 
 #pragma mark - MTA标识
 
@@ -452,11 +495,12 @@ typedef enum {
  */
 + (NSString *)getMtaUDID;
 
+
 #pragma mark - MTA高级功能，具体使用方法请咨询客服
 + (void)reportAccount:(NSString *)account type:(uint32_t)type ext:(NSString *)ext;
 + (void)reportAccount:(NSString *)account type:(uint32_t)type ext:(NSString *)ext appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
 
-+ (void)trackGameUser:(NSString *)uid world:(NSString *)wd level:(NSString *)lev;
-+ (void)trackGameUser:(NSString *)uid world:(NSString *)wd level:(NSString *)lev appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
++ (void)reportQQ:(NSString *)qq DEPRECATED_ATTRIBUTE;
++ (void)reportQQ:(NSString *)qq appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime DEPRECATED_ATTRIBUTE;
 
 @end

@@ -1,5 +1,9 @@
 MTA IOS SDK ReleaseNote
 ===================
+VERSION 2.0.0
+-------------------------------------------
+*开启新版奔溃报告
+
 VERSION 1.6.9
 -------------------------------------------
 *修复MTAEvent doesNotRecognizeSelector的问题

@@ -45,7 +45,13 @@ typedef enum {
 	/**
 	 仅在WIFI网络下发送, 发送失败以及非WIFI网络情况下不缓存数据
 	 */
-	MTA_STRATEGY_ONLY_WIFI_NO_CACHE = 7
+	MTA_STRATEGY_ONLY_WIFI_NO_CACHE = 7,
+
+	/*
+     不缓存数据，批量上报+间隔上报组合。适用于上报特别频繁的场景。
+     */
+	MTA_STRATEGY_NO_CACHE_BATCH_PERIOD = 8
+
 } MTAStatReportStrategy;
 
 @interface MTAConfig : NSObject
@@ -75,6 +81,12 @@ typedef enum {
  上报策略
  */
 @property (nonatomic) MTAStatReportStrategy reportStrategy;
+
+
+/**
+ 是否自动统计使用时长，默认打开
+ */
+@property BOOL autoTM;
 
 /**
  应用的统计AppKey
@@ -139,13 +151,6 @@ typedef enum {
 @property uint32_t maxReportEventLength;
 
 /**
- QQ号
- 调用MTA reportQQ方法后会设置此属性
- 默认为空
- */
-@property (nonatomic, copy) NSString *qq;
-
-/**
  MTA是否启动
  */
 @property BOOL statEnable;
@@ -200,13 +205,16 @@ typedef void (^errorCallback)(NSString *);
 #pragma mark - 高级配置项，具体配置方法请咨询客服
 
 @property (nonatomic, copy) NSString *statReportURL;
-@property (nonatomic, copy) NSString *customerUserID;
-@property (nonatomic, copy) NSString *account;
-@property int8_t accountType;
-@property (nonatomic, copy) NSString *accountExt;
 @property (nonatomic, copy) NSString *pushDeviceToken;
 @property (nonatomic, copy) NSString *op;
 @property (nonatomic, copy) NSString *cn;
+
+#pragma mark - 废弃API，建议替换
+@property (nonatomic, copy) NSString *customerUserID DEPRECATED_ATTRIBUTE;
+@property (nonatomic, copy) NSString *account DEPRECATED_ATTRIBUTE;
+@property int8_t accountType DEPRECATED_ATTRIBUTE;
+@property (nonatomic, copy) NSString *accountExt DEPRECATED_ATTRIBUTE;
+@property (nonatomic, copy) NSString *qq DEPRECATED_ATTRIBUTE;
 
 //typedef void (^crashCallback) (void);
 //@property (nonatomic,copy) crashCallback atCrashCallback; // 崩溃发生时候的回调，将在崩溃发生时候调用
