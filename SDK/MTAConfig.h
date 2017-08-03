@@ -179,19 +179,6 @@ typedef enum {
 @property int32_t maxSessionStatReportCount;
 
 /**
- 崩溃报告回调函数
- 在发生崩溃后的下次启动时调用
-
- @param NSString 崩溃报告，JSON格式
- */
-typedef void (^errorCallback)(NSString *);
-
-/**
- 崩溃报告的回调函数
- */
-@property (nonatomic, copy) errorCallback crashCallback; //用于crash日志删除前回调，将在崩溃发生后下次启动时调用， param为crash JSON数据
-
-/**
  获取在MTA前端控制台配置的参数
  调用这个函数前需要在MTA前端控制台中‘应用配置管理项’下的‘自定义参数’中配置才能生效
  首次配置或者更改参数配置后，需要3-5分钟才能生效

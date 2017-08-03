@@ -12,7 +12,7 @@
 /**
  MTA版本号
  */
-#define MTA_SDK_VERSION @"2.0.1"
+#define MTA_SDK_VERSION @"2.0.3"
 
 #pragma mark - 接口监控相关数据结构
 /**
@@ -320,7 +320,7 @@ typedef NS_ENUM(NSInteger, MTAErrorCode) {
  @param kvs 事件的参数，参数需要先在MTA前台配置好才能生效
  @return MTA错误码，详情请看MTAErrorCode相关注释与自定义参数长度限制说明
  */
-+ (MTAErrorCode)trackCustomKeyValueEventDuration:(uint32_t)seconds withEventid:(NSString *)event_id props:(NSDictionary *)kvs;
++ (MTAErrorCode)trackCustomKeyValueEventDuration:(double)seconds withEventid:(NSString *)event_id props:(NSDictionary *)kvs;
 
 /**
  直接上报自定义时长事件
@@ -334,7 +334,7 @@ typedef NS_ENUM(NSInteger, MTAErrorCode) {
  @param isRealTime 是否实时上报，若传入YES，则忽略全局上报策略实时上报。否则按照全局策略上报。
  @return MTA错误码，详情请看MTAErrorCode相关注释与自定义参数长度限制说明
  */
-+ (MTAErrorCode)trackCustomKeyValueEventDuration:(uint32_t)seconds withEventid:(NSString *)event_id props:(NSDictionary *)kvs appKey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
++ (MTAErrorCode)trackCustomKeyValueEventDuration:(double)seconds withEventid:(NSString *)event_id props:(NSDictionary *)kvs appKey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
 
 #pragma mark - NSArray为参数的自定义事件
 /**
