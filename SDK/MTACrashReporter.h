@@ -11,6 +11,19 @@
 @interface MTACrashReporter : NSObject
 
 /**
+ 崩溃报告回调函数
+ 在发生崩溃后的下次启动时调用
+
+ @param NSString 崩溃报告，JSON格式
+ */
+typedef void (^errorCallback)(NSString *);
+
+/**
+ 崩溃报告的回调函数
+ */
+@property (nonatomic, copy) errorCallback crashCallback; //用于crash日志删除前回调，将在崩溃发生后下次启动时调用， param为crash JSON数据
+
+/**
  单例方法，返回崩溃报告的共享实例
 
  @return 崩溃报告的共享实例
