@@ -4,12 +4,18 @@ An unofficial MTA SDK CocoaPods repository..
 
 Source website: [http://mta.qq.com/](http://mta.qq.com/)
 
-# Usage
+Documents: [http://docs.developer.qq.com/](http://docs.developer.qq.com/)
 
-Edit your podfile: `pod 'MTA'`
+Release notes: [http://mta.qq.com/mta/ctr_index/download](http://mta.qq.com/mta/ctr_index/download)
 
-Read more usage: [http://imgcache.xg.qq.com/mta/document/iOS_quick_start.zip](http://imgcache.xg.qq.com/mta/document/iOS_quick_start.zip)
+## Usage
 
-# Release notes
+Edit your podfile: 
 
-[http://mta.qq.com/mta/ctr_index/download](http://mta.qq.com/mta/ctr_index/download)
+- Basic: `pod 'MTA'`
+- With AutoTrack: `pod 'MTA/AutoTrack'`
+- With IDFA: `pod 'MTA/IDFA'`
+
+## License
+
+No License.
