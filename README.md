@@ -12,9 +12,11 @@ Release notes: [http://mta.qq.com/mta/ctr_index/download](http://mta.qq.com/mta/
 
 Edit your podfile: 
 
-- Basic: `pod 'MTA'`
-- With AutoTrack: `pod 'MTA/AutoTrack'`
-- With IDFA: `pod 'MTA/IDFA'`
+```
+pod 'MTA'           # Basic usage
+pod 'MTA/AutoTrack' # AutoTrack
+pod 'MTA/IDFA'      # IDFA
+```
 
 ## License
 

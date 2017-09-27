@@ -12,7 +12,7 @@
 /**
  MTA版本号
  */
-#define MTA_SDK_VERSION @"2.0.4"
+#define MTA_SDK_VERSION @"2.0.5"
 
 #pragma mark - 接口监控相关数据结构
 /**
@@ -475,7 +475,7 @@ typedef NS_ENUM(NSInteger, MTAErrorCode) {
  */
 + (void)reportAppMonitorStat:(MTAAppMonitorStat *)stat appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
 
-#pragma mark - 上报账号
+#pragma mark - 账号和用户相关
 
 /**
  上报账号对应实时数据中的新增账号数字段
@@ -485,6 +485,13 @@ typedef NS_ENUM(NSInteger, MTAErrorCode) {
  @param accountType 账号类型
  */
 + (void)setAccount:(NSString *)account type:(MTAAccountType)accountType;
+
+/**
+ 用户分群: 支持用户自定义属性
+
+ @param kvs key-value形式，例如"画像属性1", "属性值1"
+ */
++ (void)setUserProperty:(NSDictionary *)kvs;
 
 #pragma mark - MTA标识
 
