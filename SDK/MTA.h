@@ -12,7 +12,7 @@
 /**
  MTA版本号
  */
-#define MTA_SDK_VERSION @"2.0.5"
+#define MTA_SDK_VERSION @"2.0.8"
 
 #pragma mark - 接口监控相关数据结构
 /**
