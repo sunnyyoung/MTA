@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                  = 'MTA'
-  s.version               = '2.0.8'
+  s.version               = '2.1.0'
   s.summary               = 'An unofficial MTA SDK Cocoapods repository.'
   s.homepage              = 'http://mta.qq.com'
   s.authors               = { 'Sunnyyoung' => 'https://github.com/Sunnyyoung' }
@@ -33,5 +33,10 @@ Pod::Spec.new do |s|
   s.subspec 'InstallTracker' do |ss|
     ss.dependency         'MTA/Core'
     ss.vendored_library = 'SDK/libinstalltracker.a'
+  end
+
+  s.subspec 'Hybrid' do |ss|
+    ss.dependency         'MTA/Core'
+    ss.vendored_library = 'SDK/libmtahybrid.a'
   end
 end
