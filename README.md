@@ -18,6 +18,8 @@ pod 'MTA/AutoTrack'      # AutoTrack
 pod 'MTA/IDFA'           # IDFA
 pod 'MTA/InstallTracker' # InstallTracker
 pod 'MTA/Hybrid'         # Hybrid
+pod 'MTA/FBI'            # FBI
+pod 'MTA/MTALBS'         # MTALBS
 ```
 
 ## License
