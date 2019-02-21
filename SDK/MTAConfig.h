@@ -186,6 +186,11 @@ typedef enum {
 @property int32_t maxSessionStatReportCount;
 
 /**
+ mid，会存放到mid字段(推荐赋值APNS的token)
+ */
+@property (nonatomic, copy) NSString *mid;
+
+/**
  获取在MTA前端控制台配置的参数
  调用这个函数前需要在MTA前端控制台中‘应用配置管理项’下的‘自定义参数’中配置才能生效
  首次配置或者更改参数配置后，需要3-5分钟才能生效
@@ -202,6 +207,7 @@ typedef enum {
 @property (nonatomic, copy) NSString *pushDeviceToken;
 @property (nonatomic, copy) NSString *op;
 @property (nonatomic, copy) NSString *cn;
+@property (nonatomic, copy) NSString* commonJsonAttrs;
 
 #pragma mark - 废弃API，建议替换
 @property (nonatomic, copy) NSString *customerUserID DEPRECATED_ATTRIBUTE;

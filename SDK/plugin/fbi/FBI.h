@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import "MTA.h"
 
 @interface FBI : NSObject
@@ -46,7 +47,6 @@
 
 
 //处理JS SDK请求
--(void)bindToWebView:(id)webView;
-
+-(id)bindToWebView:(id)webView preDelegate:(id)preDelegate;
 @end
 
