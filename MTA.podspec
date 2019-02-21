@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                  = 'MTA'
-  s.version               = '2.1.2'
+  s.version               = '2.5.1'
   s.summary               = 'An unofficial MTA SDK Cocoapods repository.'
   s.homepage              = 'http://mta.qq.com'
   s.authors               = { 'Sunnyyoung' => 'https://github.com/Sunnyyoung' }
@@ -22,46 +22,55 @@ Pod::Spec.new do |s|
     ss.libraries            = 'z', 'sqlite3'
   end
 
-  s.subspec 'AutoTrack' do |ss|
-    ss.dependency             'MTA/Core'
-    ss.source_files			  	= 'SDK/plugin/autotrack/*.h'
-    ss.public_header_files  = 'SDK/plugin/autotrack/*.h'
-    ss.vendored_libraries		= 'SDK/plugin/autotrack/*.a'
-  end
-
+  # IDFA
   s.subspec 'IDFA' do |ss|
     ss.dependency             'MTA/Core'
-    ss.vendored_libraries   = 'SDK/plugin/idfa/*.a'
     ss.frameworks           = 'AdSupport'
   end
 
-  s.subspec 'InstallTracker' do |ss|
+  # Plugins
+  s.subspec 'ADTracker' do |ss|
     ss.dependency             'MTA/Core'
-    ss.source_files			  	= 'SDK/plugin/installtracker/*.h'
-    ss.public_header_files  = 'SDK/plugin/installtracker/*.h'
-    ss.vendored_libraries   = 'SDK/plugin/installtracker/*.a'
+    ss.source_files         = 'SDK/plugin/adtracker/*.h'
+    ss.public_header_files  = 'SDK/plugin/adtracker/*.h'
+    ss.vendored_libraries   = 'SDK/plugin/adtracker/*.a'
+    ss.frameworks           = 'AdSupport'
   end
 
-  s.subspec 'Hybrid' do |ss|
+  s.subspec 'AutoTrack' do |ss|
     ss.dependency             'MTA/Core'
-    ss.source_files				  = 'SDK/plugin/MTAHybrid/*.h'
-    ss.public_header_files  = 'SDK/plugin/MTAHybrid/*.h'
-    ss.vendored_libraries   = 'SDK/plugin/MTAHybrid/*.a'
+    ss.source_files         = 'SDK/plugin/autotrack/*.h'
+    ss.public_header_files  = 'SDK/plugin/autotrack/*.h'
+    ss.vendored_libraries   = 'SDK/plugin/autotrack/*.a'
   end
 
+  s.subspec 'CrashReporter' do |ss|
+    ss.dependency             'MTA/Core'
+    ss.source_files         = 'SDK/plugin/crashreporter/*.h'
+    ss.public_header_files  = 'SDK/plugin/crashreporter/*.h'
+    ss.vendored_libraries   = 'SDK/plugin/crashreporter/*.a'
+  end
+
+  s.subspec 'DataInsight' do |ss|
+    ss.dependency             'MTA/Core'
+    ss.source_files         = 'SDK/plugin/datainsight/*.h'
+    ss.public_header_files  = 'SDK/plugin/datainsight/*.h'
+    ss.vendored_libraries   = 'SDK/plugin/datainsight/*.a'
+    ss.frameworks           = 'CoreLocation'
+  end
+  
   s.subspec 'FBI' do |ss|
     ss.dependency             'MTA/Core'
-    ss.source_files				  = 'SDK/plugin/fbi/*.h'
+    ss.source_files         = 'SDK/plugin/fbi/*.h'
     ss.public_header_files  = 'SDK/plugin/fbi/*.h'
     ss.vendored_libraries   = 'SDK/plugin/fbi/*.a'
     ss.frameworks           = 'Contacts'
   end
 
-  s.subspec 'MTALBS' do |ss|
+  s.subspec 'MTAHybrid' do |ss|
     ss.dependency             'MTA/Core'
-    ss.source_files				  = 'SDK/plugin/mtalbs/*.h'
-    ss.public_header_files  = 'SDK/plugin/mtalbs/*.h'
-    ss.vendored_libraries   = 'SDK/plugin/mtalbs/*.a'
-    ss.frameworks           = 'CoreLocation'
+    ss.source_files         = 'SDK/plugin/MTAHybrid/*.h'
+    ss.public_header_files  = 'SDK/plugin/MTAHybrid/*.h'
+    ss.vendored_libraries   = 'SDK/plugin/MTAHybrid/*.a'
   end
 end
