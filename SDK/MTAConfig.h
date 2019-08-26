@@ -178,6 +178,11 @@ typedef enum {
 @property (nonatomic, copy) NSString *customerAppVersion;
 
 /**
+ 用户自定义的设备标识
+ */
+@property (nonatomic, copy) NSString *customerUserID;
+
+/**
  一个Session内允许上报的最大事件数
  传入-1表示无限制
  不建议修改这个字段
@@ -189,6 +194,12 @@ typedef enum {
  mid，会存放到mid字段(推荐赋值APNS的token)
  */
 @property (nonatomic, copy) NSString *mid;
+
+/**
+ guid，预留字段，无特定含义
+ */
+@property (nonatomic, assign) NSUInteger guid;
+
 
 /**
  获取在MTA前端控制台配置的参数
@@ -210,7 +221,6 @@ typedef enum {
 @property (nonatomic, copy) NSString* commonJsonAttrs;
 
 #pragma mark - 废弃API，建议替换
-@property (nonatomic, copy) NSString *customerUserID DEPRECATED_ATTRIBUTE;
 @property (nonatomic, copy) NSString *account DEPRECATED_ATTRIBUTE;
 @property int8_t accountType DEPRECATED_ATTRIBUTE;
 @property (nonatomic, copy) NSString *accountExt DEPRECATED_ATTRIBUTE;
