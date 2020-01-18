@@ -219,6 +219,7 @@ typedef enum {
 @property (nonatomic, copy) NSString *op;
 @property (nonatomic, copy) NSString *cn;
 @property (nonatomic, copy) NSString* commonJsonAttrs;
+@property (nonatomic, copy) NSString* externalInfo;
 
 #pragma mark - 废弃API，建议替换
 @property (nonatomic, copy) NSString *account DEPRECATED_ATTRIBUTE;

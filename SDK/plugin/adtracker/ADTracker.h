@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-//帐号的类别
+//账号的类别
 typedef NS_ENUM(NSInteger, MTAADAccountType) {
 	ADAccountMobile, //手机号
 	ADAccountMail,   //邮箱
@@ -31,10 +31,10 @@ typedef NS_ENUM(NSInteger, MTAADPayMoneyType) {
 #pragma mark - 激活后的活跃事件
 
 /**
- 帐号注册事件
+ 账号注册事件
  
- @param accountType 帐号类型
- @param account 具体的帐号
+ @param accountType 账号类型
+ @param account 具体的账号
  */
 - (void)trackRegAccountEvent:(MTAADAccountType)accountType account:(NSString *)account;
 
