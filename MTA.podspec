@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                  = 'MTA'
-  s.version               = '2.5.4'
+  s.version               = '2.5.8'
   s.summary               = 'An unofficial MTA SDK Cocoapods repository.'
   s.homepage              = 'http://mta.qq.com'
   s.authors               = { 'Sunnyyoung' => 'https://github.com/Sunnyyoung' }
@@ -59,14 +59,6 @@ Pod::Spec.new do |s|
     ss.frameworks           = 'CoreLocation'
   end
   
-  s.subspec 'FBI' do |ss|
-    ss.dependency             'MTA/Core'
-    ss.source_files         = 'SDK/plugin/fbi/*.h'
-    ss.public_header_files  = 'SDK/plugin/fbi/*.h'
-    ss.vendored_libraries   = 'SDK/plugin/fbi/*.a'
-    ss.frameworks           = 'Contacts'
-  end
-
   s.subspec 'MTAHybrid' do |ss|
     ss.dependency             'MTA/Core'
     ss.source_files         = 'SDK/plugin/MTAHybrid/*.h'

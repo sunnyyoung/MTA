@@ -14,12 +14,12 @@ Edit your podfile:
 
 ```
 pod 'MTA'                # Basic usage
-pod 'MTA/AutoTrack'      # AutoTrack
 pod 'MTA/IDFA'           # IDFA
-pod 'MTA/InstallTracker' # InstallTracker
-pod 'MTA/Hybrid'         # Hybrid
-pod 'MTA/FBI'            # FBI
-pod 'MTA/MTALBS'         # MTALBS
+pod 'MTA/ADTracker'      # ADTracker
+pod 'MTA/AutoTrack'      # AutoTrack
+pod 'MTA/CrashReporter'  # CrashReporter
+pod 'MTA/DataInsight'    # DataInsight
+pod 'MTA/MTAHybrid'      # MTAHybrid
 ```
 
 ## License

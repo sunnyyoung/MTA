@@ -13,7 +13,7 @@
  MTA版本号
  */
 
-#define MTA_SDK_VERSION @"2.5.4"
+#define MTA_SDK_VERSION @"2.5.8"
 
 #pragma mark - 接口监控相关数据结构
 /**
@@ -160,6 +160,14 @@ typedef NS_ENUM(NSInteger, MTAErrorCode) {
 + (void)trackPageViewEnd:(NSString *)page;
 
 /**
+ trackPageViewEnd带参数版本
+
+ @param page 页面名字
+ @param kvs 上报的页面参数
+ */
++ (void)trackPageViewEnd:(NSString *)page props:(NSDictionary *)kvs;
+
+/**
  标记一起页面访问的结束
  并且指定上报方式
  此接口需要跟trackPageViewBegin配对使用
@@ -170,6 +178,16 @@ typedef NS_ENUM(NSInteger, MTAErrorCode) {
  @param isRealTime 是否实时上报，若传入YES，则忽略全局上报策略实时上报。否则按照全局策略上报。
  */
 + (void)trackPageViewEnd:(NSString *)page appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
+
+
+/**
+ trackPageViewEnd带参数版本
+ 并且指定上报方式
+
+ @param page 页面名字
+ @param kvs 上报的页面参数
+ */
++ (void)trackPageViewEnd:(NSString *)page props:(NSDictionary *)kvs appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
 
 #pragma mark - 错误统计
 
